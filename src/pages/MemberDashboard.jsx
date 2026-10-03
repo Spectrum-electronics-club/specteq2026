@@ -52,7 +52,7 @@ const MemberDashboard = () => {
   const handleSaveMarks = async (submissionId, marks) => {
     try {
       const token = localStorage.getItem('specteq_token');
-      const res = await fetch(`http://localhost:5000/api/member/submissions/${submissionId}/evaluate`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/member/submissions/${submissionId}/evaluate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ const MemberDashboard = () => {
 
   const fetchSubmissions = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/member/submissions', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/member/submissions`, {
         headers: {
           'x-auth-token': token
         }
@@ -197,7 +197,7 @@ const MemberDashboard = () => {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <a 
-                          href={`http://localhost:5000${sub.fileUrl}`} 
+                          href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${sub.fileUrl}`} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="inline-flex items-center px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg text-sm transition-colors"

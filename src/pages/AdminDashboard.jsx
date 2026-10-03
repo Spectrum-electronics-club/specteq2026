@@ -43,10 +43,10 @@ const AdminDashboard = () => {
       const headers = { 'x-auth-token': token };
 
       const [statsRes, teamsRes, subsRes, prizesRes] = await Promise.all([
-        fetch('http://localhost:5000/api/admin/stats', { headers }),
-        fetch('http://localhost:5000/api/admin/teams', { headers }),
-        fetch('http://localhost:5000/api/admin/submissions', { headers }),
-        fetch('http://localhost:5000/api/settings/prizes')
+        fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/admin/stats`, { headers }),
+        fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/admin/teams`, { headers }),
+        fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/admin/submissions`, { headers }),
+        fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/settings/prizes`)
       ]);
 
       if (!statsRes.ok) throw new Error('Failed to fetch admin data. Are you an admin?');
@@ -75,7 +75,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this team?')) return;
     try {
       const token = localStorage.getItem('specteq_token');
-      const res = await fetch(`http://localhost:5000/api/admin/teams/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/admin/teams/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -93,7 +93,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this submission?')) return;
     try {
       const token = localStorage.getItem('specteq_token');
-      const res = await fetch(`http://localhost:5000/api/admin/submissions/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/admin/submissions/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });
@@ -283,7 +283,7 @@ const AdminDashboard = () => {
                           : 'Pending'}
                       </td>
                       <td className="px-6 py-4">
-                        <a href={`http://localhost:5000${sub.fileUrl}`} target="_blank" rel="noreferrer" className="text-sm font-bold text-brand-secondary hover:underline mr-4">
+                        <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${sub.fileUrl}`} target="_blank" rel="noreferrer" className="text-sm font-bold text-brand-secondary hover:underline mr-4">
                           Download File
                         </a>
                         <button onClick={() => deleteSubmission(sub._id)} className="text-red-500 hover:text-red-700 text-sm font-bold">
@@ -351,7 +351,7 @@ const AdminDashboard = () => {
                           const text = document.getElementById('announcementText').value;
                           const deadline = document.getElementById('announcementDeadline').value;
                           if (!text || !deadline) return alert('Fill both fields');
-                          await fetch('http://localhost:5000/api/announcements', {
+                          await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/announcements`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('specteq_token') },
                             body: JSON.stringify({ text, deadline })
@@ -402,7 +402,7 @@ const AdminDashboard = () => {
                     <button
                       onClick={async () => {
                         try {
-                          await fetch('http://localhost:5000/api/settings/prizes', {
+                          await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/settings/prizes`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json', 'x-auth-token': localStorage.getItem('specteq_token') },
                             body: JSON.stringify({ value: prizeData })

@@ -28,8 +28,8 @@ const Login = () => {
     setError(null);
 
     const endpoint = isLogin 
-      ? 'http://localhost:5000/api/auth/login' 
-      : 'http://localhost:5000/api/auth/register';
+      ? `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/login` 
+      : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/register`;
 
     const payload = isLogin 
       ? { email: formData.email, password: formData.password, loginRole }

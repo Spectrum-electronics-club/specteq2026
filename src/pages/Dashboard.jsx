@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   const fetchTeamData = async (token) => {
     try {
-      const res = await fetch('http://localhost:5000/api/teams/my-team', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/teams/my-team`, {
         headers: { 'x-auth-token': token }
       });
       if (res.ok) {
@@ -57,7 +57,7 @@ const Dashboard = () => {
 
   const fetchSubmissions = async (token) => {
     try {
-      const res = await fetch('http://localhost:5000/api/submissions/my-submissions', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/submissions/my-submissions`, {
         headers: { 'x-auth-token': token }
       });
       if (res.ok) {
@@ -73,7 +73,7 @@ const Dashboard = () => {
     e.preventDefault();
     const token = localStorage.getItem('specteq_token');
     try {
-      const res = await fetch('http://localhost:5000/api/teams/create', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/teams/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
         body: JSON.stringify(teamForm)
@@ -94,7 +94,7 @@ const Dashboard = () => {
     e.preventDefault();
     const token = localStorage.getItem('specteq_token');
     try {
-      const res = await fetch('http://localhost:5000/api/teams/join', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/teams/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
         body: JSON.stringify(joinForm)
@@ -121,7 +121,7 @@ const Dashboard = () => {
 
     const token = localStorage.getItem('specteq_token');
     try {
-      const res = await fetch('http://localhost:5000/api/submissions/upload', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/submissions/upload`, {
         method: 'POST',
         headers: { 'x-auth-token': token },
         body: formData
@@ -211,7 +211,7 @@ const Dashboard = () => {
                   <li key={sub._id} className="p-4 border border-slate-200 rounded-xl flex justify-between items-center bg-white">
                     <div>
                       <p className="font-bold text-brand-primary">{sub.taskName}</p>
-                      <a href={`http://localhost:5000${sub.fileUrl}`} target="_blank" rel="noreferrer" className="text-sm text-brand-secondary hover:underline">
+                      <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${sub.fileUrl}`} target="_blank" rel="noreferrer" className="text-sm text-brand-secondary hover:underline">
                         View File
                       </a>
                     </div>

@@ -6,7 +6,7 @@ const Prizes = () => {
   const [prizes, setPrizes] = useState({ first: '10,000', second: '5,000', third: '2,500' });
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/settings/prizes')
+    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/settings/prizes`)
       .then(res => res.json())
       .then(data => {
         if (data) setPrizes(data);
