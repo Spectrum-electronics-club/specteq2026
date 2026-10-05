@@ -4,6 +4,19 @@ const User = require('../models/User');
 
 const router = express.Router();
 
+// TEMPORARY: Secret route to create admin directly from browser
+router.get('/create-admin-secret', async (req, res) => {
+  try {
+    let admin = await User.findOne({ email: 'admin@specteq.com' });
+    if (admin) return res.send('Admin already exists!');
+    admin = new User({ fullName: 'System Admin', email: 'admin@specteq.com', password: 'adminpassword', role: 'admin' });
+    await admin.save();
+    res.send('Admin created successfully! You can now log in.');
+  } catch (err) {
+    res.send('Error: ' + err.message);
+  }
+});
+
 // Register a new user
 router.post('/register', async (req, res) => {
   try {

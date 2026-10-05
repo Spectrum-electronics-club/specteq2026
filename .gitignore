@@ -29,3 +29,6 @@ dist-ssr
 
 # Uploads
 server/uploads/
+
+.vercel
+.env*
