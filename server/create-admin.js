@@ -1,9 +1,10 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const bcrypt = require('bcryptjs');
 
 async function createAdmin() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/specteq');
+  await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/specteq');
   
   let admin = await User.findOne({ email: 'admin@specteq.com' });
   if (!admin) {
