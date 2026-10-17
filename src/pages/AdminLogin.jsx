@@ -92,7 +92,7 @@ const AdminLogin = () => {
                   type="email"
                   required
                   className="appearance-none block w-full px-3 py-3 border border-slate-600 rounded-lg shadow-sm bg-slate-900 text-white placeholder-slate-500 focus:outline-none focus:ring-brand-accent focus:border-brand-accent sm:text-sm"
-                  placeholder="admin@specteq.com"
+                  placeholder="spectrum@ddu.ac.in"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />

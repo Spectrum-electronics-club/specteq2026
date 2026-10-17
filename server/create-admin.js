@@ -6,11 +6,11 @@ const bcrypt = require('bcryptjs');
 async function createAdmin() {
   await mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/specteq');
   
-  let admin = await User.findOne({ email: 'admin@specteq.com' });
+  let admin = await User.findOne({ email: 'spectrum@ddu.ac.in' });
   if (!admin) {
     admin = new User({
       fullName: 'System Admin',
-      email: 'admin@specteq.com',
+      email: 'spectrum@ddu.ac.in',
       password: 'adminpassword',
       role: 'admin'
     });
