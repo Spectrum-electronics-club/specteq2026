@@ -27,6 +27,17 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Specteq API is running.' });
 });
 
+// Loader.io verification
+app.get('/loaderio-2f7b9496b743c4d867fe712c355e908c.txt', (req, res) => {
+  res.send('loaderio-2f7b9496b743c4d867fe712c355e908c');
+});
+app.get('/loaderio-2f7b9496b743c4d867fe712c355e908c.html', (req, res) => {
+  res.send('loaderio-2f7b9496b743c4d867fe712c355e908c');
+});
+app.get('/loaderio-2f7b9496b743c4d867fe712c355e908c', (req, res) => {
+  res.send('loaderio-2f7b9496b743c4d867fe712c355e908c');
+});
+
 app.get('/', (req, res) => {
   res.send('Specteq Backend API is running! Access endpoints at /api/...');
 });
