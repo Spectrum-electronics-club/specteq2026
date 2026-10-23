@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const Team = require('../models/Team');
 const User = require('../models/User');
+const { sendTeamJoinEmail } = require('../utils/mailer');
 
 // Middleware to verify token
 const verifyToken = (req, res, next) => {
@@ -52,6 +53,11 @@ router.post('/create', verifyToken, async (req, res) => {
     user.teamId = savedTeam._id;
     await user.save();
 
+    // Send team creation confirmation email (non-blocking)
+    sendTeamJoinEmail(user.email, user.fullName, teamName, inviteCode).catch((e) =>
+      console.error('Failed to send team creation email:', e.message)
+    );
+
     res.json(savedTeam);
   } catch (err) {
     console.error(err.message);
@@ -83,6 +89,11 @@ router.post('/join', verifyToken, async (req, res) => {
 
     user.teamId = team._id;
     await user.save();
+
+    // Send team join confirmation email (non-blocking)
+    sendTeamJoinEmail(user.email, user.fullName, team.teamName, team.inviteCode).catch((e) =>
+      console.error('Failed to send team join email:', e.message)
+    );
 
     res.json(team);
   } catch (err) {
